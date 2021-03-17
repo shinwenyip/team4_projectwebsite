@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>eNno Bootstrap Template - Index</title>
+  <title>Idea4U Portal</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -62,82 +62,228 @@
   </header><!-- End Header -->
 
   <main id="main">
-    
+  
     <section id="breadcrumbs" class="breadcrumbs">
-      <div class="container"> 
+      <div class="container">
         <h2>Design</h2>
+      </div>
+    </section><br>
+    <div class="section-title">
+      <span>System Design</span>
+      <h2>System Design</h2>
+    </div>
+    <section id="about" class="about">
+      <div class="container">
+        
+  
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <h3>System Architecture Diagram</h3>
+            <br><img src="assets/img/systemarchi.png" style="width:800px" alt=""><br><br>
+  
+            <p>
+              Our project uses <b>Django</b> (python web application framework) which uses a MTV (model-template-view)
+              pattern.
+            </p>
+            <p>
+              <strong style="font-size:larger;">Template</strong> is the client side <strong>presentation layer</strong> that controls the user interface architecture and
+              the content to display by using a mixture of <strong>HTML and DTL</strong> (Django Template Language) to display dynamic
+              variables and
+              perform few logical operations
+              so that each user is displayed with personalised data.
+            </p>
+            <p>
+              The <strong>url dispatcher</strong> in django <strong>maps requested URL to a view function</strong> in the application and calls it.
+              <strong style="font-size:larger;">View</strong> handles the <strong>logical part</strong> of the application and interacts with the Model to get the data and
+              in turn modifies the template accordingly.
+            </p>
+            <p>In Django, <strong style="font-size:larger;">Model</strong> handles the data and describes structure of stored data. It does the linking to the
+              database
+              and each model gets mapped to a single table in the database.
+              We can then perform different DML (data manipulation language) operations on the table to fetch or modify
+              data in
+              database.</p>
+            <p>
+              The django framework includes a default <strong>object-relational mapping</strong> layer (ORM) that is used for <strong>interaction
+              between the application model and the relational database</strong> for transmission of data.
+              ORMs automatically create a database schema from defined models and generate SQL queries from python code,
+              which
+              is used to CRUD data in our system. This allows rapid development as no SQL needs to be manually written.
+            </p>
+            <p>
+              <b style="color:crimson">Apache</b> is used as the <b>web server</b> to handle http requests, mostly massive requests such as static files
+              (css,js,images)
+              so that the django aplication can focus on other requests on functionalities of the application.
+  
+              Since the web server do not understand python, the <b style="color: green;">WSGI server</b> (implemented using <b>mod_wsgi</b>) acts as an
+              interface
+              between the Apache front end server and the django application.
+  
+            </p>
+            <p>
+  
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <h3>SSO data flow architecture</h3><br>
+            <img src="assets/img/sso.png" style="width:800px" alt=""><br><br>
+            <p>
+              Besides the built in authentication system in our portal (using username and password),
+              this portal also integrates UCL sso authentication and authorisation API. When ucl sso login option is chosen,
+              user is redirected to the ucl sso page to allow user to login to their ucl account (if not already). <br>If authorisation request is granted,
+              user will then be redirected to the callback url where user would login to the application successfully if no errors occur during exchange of 
+              information between uclapi and our application.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <section id="about" class="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <h3>Page Flow Diagram </h3>
+            <br><img src="assets/img/pageflow.png" style="width:800px" alt=""><br><br>
+          </div>
+        </div>
       </div>
     </section>
 
+  
     <section id="about" class="about">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>System Architecture Diagram</h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <h3>Data Storage      </h3>
+            <p style="align-self: center;"><h4>Entity-Relationship Diagram</h4><br</p><br>
+            <img src="assets/img/erd.png" style="width:800px" alt=""><br>
+            <br><h5>Role of each table:</h5>
+            <p>
+              <b>User -</b>
+              Stores user account details and credentials to authenticate user.
+            </p>
+            <p>
+              <b>Profile -</b>
+              Stores personal information about user obtained from profile form updated by user.
+            </p>
+            <p>
+              <b>Challenge -</b>
+              Stores data relating to the challenge submitted through challenge submission form,
+              including the author, content, deadline for idea submission and date fields.
+              Also stores challenge state (active/ended).
+            </p>
+            <p>
+              <b>Idea -</b>
+              Stores idea submitted through an idea submission form, and also other data relating to idea
+              including vote count. The approved column is set to false by default and will only be
+              displayed in portal after it has been approved in admin page.
+              The three date columns indicates the date idea is submitted (not as draft), the last modified date and the
+              date the idea is created.
+            </p>
+            <p>
+              <b>Tag -</b>
+              Stores the description of categories used to classify ideas and challenges.
+              For example, departmental tags can be defined to look for ideas for a specific healthcare sector in
+              NHS.
+            </p>
+            <p>
+              <b>Comment -</b>
+              Stores the comments on an idea by a user.
+            </p>
+            <p>
+              <b>Review -</b>
+              Stores the data of each idea review, including the user that did the review and the idea being reviewed.
+              Has a one to many relationship with CriteriaScore as each review contains a list of scores each linked to a
+              criteria depending on the criterias specified in the challenge which the idea is submitted to.
+            </p>
+            <p>
+              <b>CriteriaScore -</b>
+              Stores score for each criteria and the review object when a review is submitted.
+              Score is given a range from 0 to 10.
+            </p>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="about" class="about">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Page Flow Diagram </h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
+    <div class="section-title">
+      <span>User Interface Design</span>
+      <h2>User Interface Design</h2>
+    </div>
+    <section id="about" class="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <h3>Sketches</h3>
+            <img src="assets/img/design.png" style="width:1050px" alt="">
+            <p>
+              In the designing stage, we sketched out a rough idea on the look of our page
+              based on the requirements and feedback obtained from potential users.
+            </p>
           </div>
         </div>
-      </section>
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <br><h3>Design Principles</h3><br>
+            <h4><b>Clarity</b></h4>
+            <p>
+              Our portal provides an easy-to-use interface to avoid confusion by providing clear instructions of what the portal is for and how to get started in the home page. Click targets(buttons) are easy to recognize and easy to predict what will happen next.</p>
+            <p>
+              Requirements for password are also clearly listed in sign up form to avoid confusion and having to repeat action. Other form fields also have help texts for further clarification of field functions. If any field data is invalid, form shows user where error is and provides reason.
+            </p>
+            <img src="assets/img/password.jpg" style="width:300px" alt="">
+            <img src="assets/img/error.jpg" style="width:350px" alt=""><br>
+            <br><h4><b>Feedback</b></h4>
+            <p>
+              Immediate feedbacks are given to indicate user action has been acknowledged. For example, a green message pops up at the top of page whenever user successfully signs in or update profile.            
+            </p>
+            <img src="assets/img/feedback1.jpg" style="width:300px" alt="">
+            <img src="assets/img/signedinfeedback.jpg" style="width:280px" alt="">
+            <p>
+              Vote and subscribe buttons changes to unvote and unsubscribe respectively, with count changing beside it to notify that action has been registered.
+            </p>
+            <img src="assets/img/vote.jpg" style="width:80px" alt="">
+            <img src="assets/img/unvote.jpg" style="width:80px" alt=""><br>
+            <br><h4><b>Simplicity</b></h4>
+            <p>
+              To reduce amount of content and variety of options on a single page, filter options are hidden to provide cleaner interface.
+              Filter options are easily accessed by clicking on filter button.
+            </p>
+            <br><h4><b>Consistency</b></h4>
+            <p>
+              To create familiarity for better user experience, icons, buttons and styles follow a consistent design.
+            </p>
+            <p>
+              Layout of ideas and challenges dashboards are similar, with same filter and sort buttons indicating same behaviour of the buttons in different pages. 
+              Forms in the portal also have similar layout and styling
+            </p>
+            <br><h4><b>Visual design</b></h4>
+            <p>
+              Placing varying emphasis on different key attributes such as title, content and tags is achieved by using different font sizes and styling
+            </p>
+            <p>
+              Idea and Challenge detail pages are styled as a single column layout (similar to medium articles) with clear hierarchy to make content easier to scan and read. 
+            </p>
+            <p>
+              Widely understood symbols such as the idea, comment , calendar, edit and trashcan(for delete) icons are used to represent commonly used actions to minimize recall in favour of recognition.
+            </p>
+            <br><h4><b>Confirmation</b></h4>
+            <p>
+              For actions that are important and irreversible, confirmation is required to prevent accidental action errors. For example, confirmation message is shown for delete actions.
+            </p>
+            <img src="assets/img/delete.jpg" style="width:300px" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <section id="about" class="about">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Class-Entity diagram</h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="about">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Design Patterns</h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="about">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Data Storage</h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
   </main>
 
