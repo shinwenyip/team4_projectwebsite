@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Idea4U Portal</title>
+  <title>eNno Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -75,8 +75,9 @@
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Project Background </h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              <strong>Idea4U</strong> is an idea management website designed for UCL and NHS.
+              It aims to provide a <strong>web-based idea-crowd-sourcing</strong> application that allows external 
+              stackholders to interact with the challenges that UCL/NHS trying to solve.
             </p>
           </div>
         </div>
@@ -89,8 +90,24 @@
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Project Goals </h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              The main goals of our project are trying to <strong>maximize employee engagement</strong> 
+              on idea contribution. Because Employee ideas can be a powerful driver of 
+              improvements and innovation within any company. Most great ideas for enhancing 
+              and achieving business growth come from employees who are interacting with clients. 
+              They will have ideas/feedback on how to improve processes, customer service, 
+              product design or even some operational suggestions. Thus we have to encourage 
+              engagement of employees.
+            </p>
+            <p>
+              We also need to be able to <strong>address a specific problem area</strong> by 
+              posting challenges to quickly capture and manage useful problem solving strategies
+              from users. And manage and organise feedback/ideas collected efficiently so that
+              the better ideas with higher demands can be prioritised for planning and 
+              implementation.
+            </p>
+            <p>
+              We believe our application will help foster innovation and provide an efficient 
+              way to test UCL/NHS approach.
             </p>
           </div>
         </div>
@@ -103,9 +120,19 @@
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Requirements Gathering </h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              In order to make sure the requirements of our project, we arranged an online
+              meeting with our clients. During the meeting, our clients told us the background
+              and basic requirements of our project. In subsequent weekly meeting, we clarified
+              any ambiguities and made the final MosCow list.
             </p>
+            <a></a>
+            <p>Following is a sample of questions we asked during the interview:</p>
+            <ol>
+              <li>What are the current ways of sourcing ideas in UCL and NHS?</li>
+              <li>What would be the main functionalities/features of this portal?</li>
+              <li>Who are the main users of this portal?</li>
+              <li>In your opinion, what would be the perfect outcome of this project?</li>
+            </ol>
           </div>
         </div>
       </div>
@@ -116,10 +143,8 @@
         <div class="row">
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Personas </h3>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+            <img src="assets/img/persona1.png" style="width:800px" alt=""><br></br>
+            <img src="assets/img/persona2.png" style="width:800px" alt=""><br></br>
           </div>
         </div>
       </div>
@@ -128,11 +153,8 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-            <h3>User Case List </h3>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+            <h3>User Case Diagram</h3>
+            <img src="assets/img/use_case_diagram.jpg" style="width:900px" alt=""><br></br>
           </div>
         </div>
       </div>
@@ -142,10 +164,55 @@
         <div class="row">
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>MOSCOW List</h3>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+            <b><u>MUST HAVE</u></b>
+            <ol>
+              <li>Ideas can be created, retrieved, updated and deleted (CRUD)</li>
+              <li>Challenges can be created, retrieved, updated and deleted (CRUD)</li>
+              <li>
+                Every user has an user profile (name, description, points, submitted ideas, 
+                subscribed challenges)
+              </li>
+              <li>
+                UCL students and staffs can login by UCL SSO (Single Sign On) with 
+                UCL account credentials.
+              </li>
+              <li>
+                Timeline for each challenge (publishing date, Ideas phase, voting phase, 
+                evaluation phase, feedback phase)   
+              </li>
+              <li>Every registered user can vote ideas. Every single vote has equal weightage.  </li>
+              <li>Moderators evaluate the ideas based on criterias.  </li>
+              <li>Leaderboard</li>
+              <li>Ideas/challenges are sorted based on popularity (number of votes/ideas) or date-posted</li>
+              <li>
+                Notification engine 
+                <ul>
+                  <li>
+                    - To notify users on interactions on their idea, 
+                    updates on subscribed challenges and new challenges
+                  </li>
+                  <li>
+                    - To notify moderators when an idea is posted for reviewing
+                  </li>
+                </ul> 
+              </li>
+              <li>Permissions for different type of users (common user, moderator and administrator))</li>
+            </ol>
+
+            <b><u>SHOULD HAVE</u></b>
+            <ol>
+              <li>Allow commenting on ideas  </li>
+              <li>Allow stakeholders to subscribe to a challenge to get updates  </li>
+              <li>Invitation to evaluate ideas</li>
+            </ol>
+
+            <b><u>COULD HAVE</u></b>
+            <ol>
+              <li>Save idea/challenge drafts and edit later</li>
+              <li>Challenges can be set to public or private</li>
+              <li>Community guidelined for website</li>
+              <li>Classify challenges and ideas by tags </li>
+            </ol>
           </div>
         </div>
       </div>

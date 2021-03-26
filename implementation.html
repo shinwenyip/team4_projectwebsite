@@ -71,10 +71,33 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-9 pt-4 pt-lg-0 m-3 content">
-            <h3>Authentication</h3>
+            <h3>Authentication (Allauth)</h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              In our project, we have two ways to authenticate public users by 
+              pyhton denpendency "Django-Allauth".
+            </p>
+            <h5>Sign up by personal emails:</h5>
+            <p>
+              Public users can sign up by providing username, email and password, then a
+              verification email would be sent to the assigned email account with a unique
+              verification link. After verified, user can login website by username and 
+              password or reset password whenever they want to.
+            </p>
+            <p>
+              Allauth provides all views we needed, so what we need to do is to rewrite the 
+              templates and set url paths. 
+            </p>
+            <img src="assets/img/allauth_templates.png" style="width:350px" alt=""><br></br>
+            <p>
+              Also we set an admin email to send all verification emails, and store these 
+              sensitive data in web configuration file.
+            </p>
+            <img src="assets/img/set_email.png" style="width:600px" alt=""><br></br>
+
+            <h5>Sign up by Gmail account:</h5>
+            <p>
+              Our website provides Google SSO (Single Sign On) for public users, which is 
+              a easier way to sign up.
             </p>
           </div>
         </div>
@@ -83,9 +106,119 @@
           <div class="col-lg-9 pt-4 pt-lg-0 m-3 content">
             <h3>Notification</h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              Whenever users vote ,comment or submit an idea to challenge, the idea author or
+              the challenge moderator would recieve an notification massage in the "Notification"
+              tab under user profile.
             </p>
+            <p>
+              To implement this, we used the denpendency "Django-notification-nq" and
+              customized several signal dispatchers which would send a signal whenever 
+              users should be notified.
+            </p>
+            <p>
+              For example, the picture below is for the signal dispatcher for notifying comments.
+              To send this signal, view functions just need to call "signal_comment" with a
+              comment form as instance.
+            </p>
+            <img src="assets/img/notification_signal.png" style="width:600px" alt=""><br></br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 m-3 content">
+            <h3>Leaderboard (Redis)</h3>
+            <p>
+              <b>Redis</b> 
+              - Redis is an open source, in-memory data structure store, used as a 
+               database, cache, and message broker.
+            </p>
+            <p>
+              <b>Settings</b> 
+              - To implement leaderboard, we set a redis cache instead of directly 
+              reading from memory.
+            </p>
+            <img src="assets/img/redis_setting.png" style="width:800px" alt=""><br></br>
+            <p>
+              <b>"redisRank" function in users.views</b> 
+              - We stored data using ordered set {username : score} and wrote several
+              methods to manage (get all ranks, get user score/rank, add/update user
+              score etc.).
+            </p>
+            <img src="assets/img/redisRank_1.png" style="width:700px" alt=""><br></br>
+            <img src="assets/img/redisRank_2.png" style="width:600px" alt=""><br></br>
+            <p>
+              <b>"leaderboard" function in users.views</b> 
+              - To get all essential contents by using methods in "redisRank" and send 
+              contents to leaderboard.html.
+            </p>
+            <img src="assets/img/leaderboard.png" style="width:500px" alt=""><br></br>
+            <p>
+              <b>Signals</b> 
+              - As a new user object is created, a "post_save" signal would be sent to
+              add this new user to redis cache. Also, redis cache would delete users if 
+              objects deleted which would send a "pre_delete" signals.
+            </p>
+            <img src="assets/img/redis_signal.png" style="width:600px" alt=""><br></br>
+            <p>
+              <b>"changeScore" function in ideas.views</b> 
+              - Users would obtain one point whenever they submit, vote or comment an idea,
+              and also increase one point when their idea gets an vote or an comment. Besides,
+              their score would decrease if they cancel votes. After changing, the new score 
+              would be saved in profile and updated on leaderBoard which is a redis database. 
+            </p>
+            <img src="assets/img/changeScore.png" style="width:600px" alt=""><br></br>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 m-3 content">
+            <h3>UCL SSO (Single Sign On)</h3>
+            <p>By UCL SSO, UCL students and staffs can login our website with their UCL
+              account credentials.
+            </p>
+            <p>
+              To implement UCL SSO, we used UCL API. We added our project to the API dashboard
+               and set the callback url to our website, getting all needed information for exchange
+               data (including API token, client id, client secret etc.).
+            </p>
+            <p>
+              Then we wrote a function to exchange data with UCL API three times, and 
+              after that, login user according to the user infomation we obtained.
+            </p>
+            <p>
+              As users click the UCL SSO button in website, they would be redirected to 
+              UCL SSO website and log in with UCL credentials if not logged in already.
+              Then UCL SSO website would call back to the callback page in our website
+              which run the "uclsso" function. In the beginning, "uclsso" function runs
+              "receive_callback" function to exchange data, then log in user by 
+              "AutomaticUserLoginMiddleware" class after splitting all useful data.
+            </p>
+
+            <h5>"uclsso" Function</h5>
+            <p>"uclsso" function obtains user personal data, then create or find out 
+              user object to login.
+            </p>
+            <img src="assets/img/uclsso.png" style="width:800px" alt=""><br></br>
+
+            <h5>"receive_callback" Function</h5>
+            <p>Exchange data first time - User authorised and send "result" and "code":</p>
+            <img src="assets/img/callback_1.png" style="width:500px" alt=""><br></br>
+            <p>
+              Exchange data second time - Obtain a OAuth user token for 
+              retrieving personal data and certain API endpoints:
+            </p>
+            <img src="assets/img/callback_2.png" style="width:600px" alt=""><br></br>
+            <p>
+              Exchange data third time - Obtain personal data and transfer format to a dict:
+            </p>
+            <img src="assets/img/callback_3.png" style="width:600px" alt=""><br></br>
+
+            <h5>"AutomaticUserLoginMiddleware" Class</h5>
+            <p>
+              Finally, authenticate user by allauth backend and login user with sending
+              successful message:
+            </p>
+            <img src="assets/img/sso_login.png" style="width:800px" alt=""><br></br>
           </div>
         </div>
     

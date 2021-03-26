@@ -73,10 +73,15 @@
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
               <h3>Summary of Achievements</h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
+              <h4>
+                Achievements - MosCow List Status
+              </h4>
+              <img src="assets/img/requirements_1.png" style="width:800px" alt=""><br></br>
+              <img src="assets/img/requirements_2.png" style="width:800px" alt=""><br></br>
+              <h4>
+                Achievements - Individual Contributions
+              </h4>
+              <img src="assets/img/contribution.png" style="width:800px" alt=""><br></br>
             </div>
           </div>
         </div>
@@ -87,10 +92,7 @@
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
               <h3>Known Bug List</h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
+              <img src="assets/img/bug_list.png" style="width:700px" alt=""><br></br>
             </div>
           </div>
         </div>
@@ -101,9 +103,76 @@
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
               <h3>Critical Evaluations</h3>
+              <h4 style="font-style: italic; font-weight: bold;">User Interface and Experience</h4>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
+                Our website has a <strong>navigation bar</strong> on the top of every page. Users can 
+                redirect to any page if they want to.
+                
+                Also, there is a page for <strong>community guildelines</strong> to ensure the community 
+                stays protected.
+                Admin users can add as many guildelines as they want in admin page. Currently we have 
+                "Fake engagement policy" and "Impersonation policy" as examples guildelines.
+                And we have a simple <strong>introduction</strong> about our website on the 
+                <strong>home page</strong> and every visitor and logged in user would be 
+                redirected to this page before they dive the website.
+                
+                <a></a>
+              </p>
+              <br></br>
+              <h4 style="font-style: italic; font-weight: bold;">Functionality & Efficiency</h4>
+              <p> 
+                We achieved all <strong>MUST</strong> and <strong>SHOULD</strong>, and most of 
+                <strong>COULD</strong> requirements in MoSCow list. 
+                And in order to keep user data safe and to test UCL/Google SSO, we deployed our website
+                with <strong>HTTPS</strong>. 
+              </p>
+              <p>
+                In order to schedule asynchronous task for challenge state to change to ended when 
+                the deadline is reached, We use a tool called <strong>celery</strong> to run the task 
+                outside the HTTP request-response cycle.
+                And to pass messages between Django project and Celery workers, we use <strong>Redis</strong>
+                (an in-memory key-value database) as a message broker.
+
+                Besides, for increasing performance of leaderboard, we also used Redis as a 
+                <strong>cache backend</strong> to store and manage user scores.
+              </p>
+              <br></br>
+              <h4 style="font-style: italic; font-weight: bold;">Stability</h4>
+              <p>
+                Our project took rigorous and extensive testing procedure at the 
+                end of project.
+                We did <strong>unit tests</strong>, <strong>functional tests</strong> 
+                and <strong>load tests</strong>. In unit tests,
+                we reached 93% code coverage totally and had a good performance 
+                in load test which can read the report at https://bit.ly/3slW0f2.
+              </p>
+              <br></br>
+              <!-- <h4 style="font-style: italic; font-weight: bold;">Compatibility</h4>
+              <p>Our project started with django 3.1.7 and </p>
+              <br></br> -->
+              <h4 style="font-style: italic; font-weight: bold;">Maintainability</h4>
+              <p>
+                Since we used the <strong>Django</strong> framework which has a very 
+                clear <strong>MTV</strong> (Models, Templates, Views) structure,
+                it is not hard to learn and maintain the work pattern for our project.
+                And we wrote all denpendencies needed in github src/requirements.txt.
+              </p>
+              <p>
+                Also, We uploaded a <strong>code review video</strong> in YouTube which 
+                contains the system architecture diagram, data flow diagram, code
+                reviewing and user demo.
+              </p>
+              <br></br>
+              <h4 style="font-style: italic; font-weight: bold;">Project Management</h4>
+              <p>
+                We had at least one <strong>inner-team meeting</strong> every week with 
+                our team members. And in these meetings, we did preparing work for coding 
+                such as database constructing, requirements analysis etc., then we always 
+                made a plan for next week and allocated different tasks to individuals.
+              </p>
+              <p>
+                Besides, we also had one <strong>client meeting</strong> every week to present 
+                our progress and got feedback from them.
               </p>
             </div>
           </div>
@@ -115,24 +184,12 @@
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
               <h3>Future Work</h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section id="about" class="about">
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Testing Strategy </h3>
-              <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
-              </p>
+              <ol>
+                <li>Choosing a context-related thumbnail for each challenge and idea by AI;</li>
+                <li>Approving ideas by AI;</li>
+                <li>Learning and applying pattern recognise searching; </li>
+                <li>Learning and applying AI recommendation system; </li>
+              </ol>
             </div>
           </div>
         </div>
