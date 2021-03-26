@@ -49,7 +49,12 @@
           <li><a href="index.html">Home</a></li>
           <li><a href="requirements.html">Requirements</a></li>
           <li><a href="research.html">Research</a></li>
-          <li><a href="design.html">Design</a></li>
+          <li class="drop-down"><a href="">Design</a>
+            <ul>
+              <li><a href="design.html#top">System Design</a></li>
+              <li><a href="design.html#uidesign">User Interface Design</a></li>
+            </ul>
+          </li>
           <li><a href="implementation.html">Implementation</a></li>
           <li class="active"><a href="testing.html">Testing</a></li>
           <li><a href="evaluation.html">Evaluation</a></li>
@@ -73,8 +78,25 @@
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
               <h3>Testing Strategy </h3>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
+                For quality assurance, we applied various testing strategies to thoroughly test our code and the user experience with our web portal. 
+                <br>
+                <p><b>1. Structured tests</b>
+                  <br> Our tests are structured to fit our project by grouping written tests 
+                  into test forms. test models and test views files in each app module (challenges, ideas, users). We also separate functional tests and url tests into separate folders for better efficiency in designing tests.
+                </p>
+                <p>
+                  <b>2. Reports and coverage</b>
+                  <br> We use generated test coverage reports to measure the effectiveness of our tests and also to suggest what should be tested.
+                  We also generate performance reports for stress testing and responsive testing to find ways to improve our web app.
+                </p>
+                <p>
+                  <b>3. Regression Testing</b>
+                  <br>To ensure existing functionalities are not broken when adding new code, automated integration tests are run before pushing new changes into the main server.
+                </p>
+                <p>
+                  <b>4. Virtual Environments</b>
+                  <br> We use python virtualenv to develop our code in isolated environments. This is to ensure our project is not affected by other development outside the environment, and dependencies can be tested without installing them on our devices.
+                </p>
               </p>
             </div>
           </div>
@@ -85,11 +107,51 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Unit and Integration Testing</h3>
+              <h3>Automated Unit & Integration Testing</h3>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
+                To verify that the individual components of our code and the interactions between them behave properly, we performed automated unit and integration testing using the Django test framework built on the python standard unittest library. 
+                <br><br><b>Automated testing</b> saved us a lot of time as our portal contains many features which is time-intensive to perform manual testing every time code is changed. This is done by writing individual test cases for the methods on the <b>urls, models, views and forms</b> for our application.
               </p>
+              <p>
+                In our test cases, we utilised the <b>Test Client</b> python class that acts as a dummy browser to test our views and interact with our application programmatically by 
+                 simulating GET and POST requests on url. <br>
+                 <br> Here are some examples of our written test cases.<br>
+              </p>
+              <div class="modal fade bd-example-modal-lg show" id="myModal1" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="dynamic-content">
+                      <img src="assets/img/testcase_ex.jpg" class="img-fluid" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade bd-example-modal-lg show" id="myModal2" role="dialog">
+                <div class="modal-dialog modal-lg">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body" id="dynamic-content">
+                      <img src="assets/img/testcase_ex2.jpg" class="img-fluid" alt="" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <img href="#myModal1" data-toggle="modal" src="assets/img/testcase_ex.jpg" style="width:400px" alt="">
+              <img href="#myModal2" data-toggle="modal" src="assets/img/testcase_ex2.jpg" style="width:400px" alt="">
+              <p>
+                We also used the coverage tool for measuring the amount of code tested, which we have managed to achieve total coverage above 90%.
+              </p>
+              <img src="assets/img/coverage1.jpg" style="width:350px" alt="">
+              <img src="assets/img/coverage2.jpg" style="width:350px" alt="">
             </div>
           </div>
         </div>
@@ -99,11 +161,63 @@
         <div class="container">
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Automated Testing </h3>
+              <h3>Functional Testing </h3>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
+                Other than testing the code functionalities, we also want to test the user interactions with the application running on a browser. 
+                <br><br> To achieve this, we used Selenium framework with Chrome webdriver to automate real browser testing by simulating a real user interacting with the site, such as :
+                <li>Redirects on button clicks</li> 
+                <li>Filtering and Sorting</li>
+                <li>Filling and Submitting forms</li>
+                <li>Views for different user types</li>
               </p>
+              <p>
+                The LiveServerTestCase class provided is used to launch live Django server in the background during the test and shutting down on teardown.
+              </p>
+              <img src="assets/img/selenium.gif" style="width:600px" alt=""><br>Automating test user login and signup redirect<br>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="about" class="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+              <h3>Compatability and Responsive Design Testing</h3>
+              <p>
+                To test that our web application works well across different mobile and desktop browsers, we used an application called lambdatest 
+                to perform <b>live interactive multibrowser and multi operating system</b> testing.
+              </p>
+              <img src="assets/img/windows10test.JPG" style="width:600px" alt=""><br><br>
+              <p>
+                We also used the software to <b>auto generate screenshots</b> of our web pages across multiple devices, OS, browsers and resolutions to perform visual cross system compatibility testing. 
+              </p>
+              <img src="assets/img/alltests.JPG" style="width:700px" alt=""><br><br>
+              <p>
+                For responsive testing, we installed the <a href="https://www.lambdatest.com/lt-browser">LT browser</a> application to test our website’s responsiveness live across a variety of major devices and viewports.
+              </p>
+              <img src="assets/img/galaxynote.gif" style="width:350px" alt="">
+              <img src="assets/img/LTBrowser.png" style="width:350px" alt="">
+              <p><br>
+                Test Reports from LTBrowser & PageSpeed Insights : <br>
+                <a href="https://developers.google.com/speed/pagespeed/insights/?url=https%3A%2F%2Fidea-4-u.ga%2F&tab=desktop">Home Page   </a>&#x2022;
+                <a href="https://report.lambdatest.com/audit-report/Uf1bSAT4Ed3OkF0n21D208yLN6dGezDQMWqMkakPz85Ef11fJ6">Ideas Page  </a>&#x2022;
+                <a href="https://report.lambdatest.com/audit-report/CkTM7zgWzLJC3b4q4ojnU20YN2xG8O11iU2f81MEgyyLiK5Egu">Challenges Page</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="about" class="about">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+              <h3>Performance/Stress Testing</h3>
+              <p>
+                For load testing, we used a third party software called <a href="https://loader.io/">Loader.io</a>.
+                This test involves testing the response time and error rate with variables such as the number of users and the time span. Below is an example of load test with 100 to 250 users constantly interactive with the website over one minute. Results show that we have a very low error rate, 0.7% in this case, and a quick response time of 2.1s on average.
+              </p>
+              <img src="assets/img/loadtest.png" style="width:800px" alt=""><br>
+              <small class="h6">Click <a href="https://bit.ly/3slW0f2">here</a> to view the report</small>
             </div>
           </div>
         </div>
@@ -115,9 +229,11 @@
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
               <h3>User Acceptance Testing</h3>
               <p>
-                Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                velit esse cillum dolore eu fugiat nulla pariatur.
+                To test that our web application is well validated by end users, we have sent the url of our deployed web application to our <b>Clients, Teaching assistant,</b> and
+                our <b>peers</b> to try out the features of our web application by interacting with it. The subsequent feedbacks collected on the user experience were then used
+                improve our application.
               </p>
+              <img src="assets/img/testusers.JPG" style="width:600px" alt=""><br>
             </div>
           </div>
         </div>
