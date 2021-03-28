@@ -246,10 +246,20 @@
             </p>
             <p>
               To implement this, we send a signal to schedule a Celery task (to change challenge state at deadline) 
-              everytime a challenge instance is created or updated. If an active challenge deadline is updated, 
+              everytime a challenge instance is created or updated. 
+            </p>
+            <p><b>Scheduling task after receiving signal: </b><p>
+              <img src="assets/img/signalc.JPG" style="width:800px" alt=""><br>
+            <br>
+            <p><b>Task to be executed at eta:</b><p></p>
+            <img src="assets/img/task.JPG" style="width:500px" alt=""><br><br>
+            <p>
+              If an active challenge deadline is updated, 
               the old scheduled task linked to the instance is revoked and new task is scheduled to update the new eta. 
               To manage the linking of instance to task id, a redis hash data structure is used to store mapping of instance id to task id.
             </p>
+            <p><b>After deadline is updated:</b><p></p>
+            <img src="assets/img/signalu.JPG" style="width:800px" alt=""><br>
           </div>
         </div>
     
@@ -261,21 +271,52 @@
               Clicking on vote button adds user to the list of users that voted for that idea.
             </p>
             <p>
-              <b>Ajax</b> (using jquery) allow toggling between like and unlike which eliminates the need of reloading the page which would be time consuming and unproductive.
+              <b>Ajax</b> (using jquery) allow toggling between vote and unvote which eliminates the need of reloading the page which would be time consuming and unproductive.
             </p>
             <p>
               <b>Javascript code on the client</b> – When vote button is clicked, browser makes a request. Javascript code generates a XHR object 
               (contains JS data and url to vote callback function on server) which is sent as a request object to the server.
             </p>
-            <img src="assets/img/btn.JPG" style="width:700px" alt=""><br><br>
-            <img src="assets/img/ajax.JPG" style="width:500px" alt="">
-            <p>
+            <img src="assets/img/ajax2.JPG" style="width:700px" alt=""><br><br>
+            <div class="row">
+            <img data-toggle="modal" href="#script" src="assets/img/ajax1.JPG" style="width:400px;object-fit: cover;float: left;" alt="">
+            <img data-toggle="modal" href="#view" src="assets/img/ajax3.JPG" style="width:400px;object-fit: cover;object-position: left top;" alt="">
+            </div>
+            <div class="modal fade bd-example-modal-lg show" id="script" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">JavaScript Code</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/ajax1.JPG" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade bd-example-modal-lg show" id="view" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Vote callback function</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/ajax3.JPG" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p><br>
               <b>Vote callback function </b>– this view function handles the request by <b>increasing/decreasing vote count</b> of the idea object 
               and <b>add/remove user from list of voted users</b>, proceeds by <b>sending a success/failure json response</b> which will change state of 
               like button to blue/black in template if success.
             </p>
-            <img src="assets/img/voteview.JPG" style="width:500px;" alt=""><br><br>
-            <img src="assets/img/jsonresponse.JPG" style="width:500px;" alt="">
             <p>Since the request is asynchronous, the rest of the code executes without interruptions. </p>
           </div>
         </div>
@@ -290,16 +331,142 @@
               The idea and challenge forms uses the ModelForm helper class, which removes redundancy of having to define field types again in the form and rendering individually 
               in template after already defining them in the model. 
               <br>Some default form fields were overridden to match our project requirements, such as the select date widget for the date field, checkbox widget to select multiple tags and tinymce rich text editor.
+            </p>
+            <div class="row">
+              <figure class="figure">
+                <img data-toggle="modal" href="#cc" src="assets/img/challengecreate.JPG" style="width:400px;object-fit: cover;float: left;object-position: left top;" alt="">
+                <figcaption class="figure-caption text-right">Challenge create view</figcaption>
+              </figure>
+              <figure class="figure">
+                <img data-toggle="modal" href="#cf" src="assets/img/challengeform.JPG" style="width:400px;object-fit: cover;object-position: left top;" alt="">
+                <figcaption class="figure-caption text-right">Challenge Form</figcaption>
+              </figure>
+            </div>
+            <div class="modal fade bd-example-modal-lg show" id="cc" role="dialog">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Challenge Create View function</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/challengecreate.JPG" style="width:max-content" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade bd-example-modal-lg show" id="cf" role="dialog">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Challenge Form</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/challengeform.JPG" style="width:max-content" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p>
               <br>One of the requirements was to allow challenge creator to either pick thumbnail image from a list of image provided or upload their own image.
               As Django only allow one input field for each model field, we have to write custom input html tags for the thumbnail image field. 
               More advanced input methods such as adding new criterias as foreign key other than the available ones also require custom html tags and saving methods in view function.<br>
+            </p>
+            <div class="row">
+              <figure class="figure">
+                <img data-toggle="modal" href="#custom" src="assets/img/formcustom.JPG" style="width:400px;height:200px;object-fit:cover;float: left;object-position: left top;" alt="">
+                <figcaption class="figure-caption">Script for custom input fields</figcaption>
+              </figure>
+              <figure class="figure">
+                <img data-toggle="modal" href="#imgp" src="assets/img/imgpicker.JPG" style="width:400px;height:200px;object-fit: cover;object-position: left top;" alt="">
+                <figcaption class="figure-caption">Using Image Picker jquery plugin</figcaption>
+              </figure>
+            </div>
+            <div class="modal fade bd-example-modal-lg show" id="custom" role="dialog">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Script for custom fields</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/formcustom.JPG" style="width:max-content" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade bd-example-modal-lg show" id="imgp" role="dialog">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Using Image Picker jquery plugin</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/imgpicker.JPG" style="width:max-content" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p>
               <br><b>List, filter and sort ideas/challenges</b>
               <br>This is done by constructing querysets in the view function which filter/sort based on the GET request query value parameters ( vote_count, date_posted, tags etc). 
             </p>
+            <div class="modal fade bd-example-modal-lg show" id="sort1" role="dialog">
+              <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Sorting Dropdown Button</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/sort1.JPG" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade bd-example-modal-lg show" id="sort2" role="dialog">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Challenges View function</h5>
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/sort2.JPG" style="width:max-content" class="img-fluid" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <figure class="figure">
+                <img data-toggle="modal" href="#sort1" src="assets/img/sort1.JPG" style="width:400px;object-fit: cover;float: left;object-position: left top;" alt="">
+                <figcaption class="figure-caption text-right">Sort dropdown in html</figcaption>
+              </figure>
+              <figure class="figure">
+                <img data-toggle="modal" href="#sort2" src="assets/img/sort2.JPG" style="width:400px;object-fit: cover;object-position: left top;" alt="">
+                <figcaption class="figure-caption text-right">Querying in challenges view function</figcaption>
+              </figure>
+            </div>
             <p>
               <b>Retrieve idea/challenge instance</b>
               <br>This is done by passing object primary key (id) in request url. The dynamic field data are displayed by using template variables in the template relating to the context object given in view function that renders the template.
             </p>
+
             <p>
               <b>Drafts</b><br>
               If idea/challenge is submitted as draft (using draft button), the date_posted field of the object instance is left null (otherwise filled as current time) and the object will not be viewed by anyone other than the creator. 
