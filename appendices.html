@@ -67,6 +67,7 @@
             <ul>
               <li><a href="appendices.html#usermanual">User Manual</a></li>
               <li><a href="appendices.html#deploy">Deployment Guide</a></li>
+              <li><a href="appendices.html#license">Legal Issues</a></li>
             </ul>
           </li>
         </ul>
@@ -261,265 +262,556 @@
         </div>
     </section>
 
-      <section id="about" class="about">
-        <div class="container">
+    <section id="about" class="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <h3 id="deploy">Deployment Guide</h3>
+              <p>Our portal is currently hosted with a Linode Server. The instructions below will show the steps needed to deploy it on LInode specifically. </p>
+              <p>At the homepage of the server, there will be a ssh access command presented. Copy that and paste it in your terminal. In our case, it is the line below: </p>
+              <code >ssh root@139.162.234.241</code>
+              <br><br>
+              <div>
+                  <h4>Hostname</h4>
+                  <p class="margin-top">Once accessed, check for any new updates and change the host name to “django-server”.
+                  </p>
+                  <code>apt-get update && apt-get upgrade</code><br>
+                  <code>hostnamectl set-hostname django-server</code>
+                  <p class="margin-top">Add hostname to the list of hosts
+                  </p>
+                  <code>Nano /etc/hosts                </code><br>
+                  <p class="margin-top">Insert your ip address and your host name (django-server) below the already-available
+                      localhost. </p>
+                  <img src="assets/appendics/hosts.png" class="image">
+              </div>
+              <br><br>
+              <div>
+                  <h4>Create a limit user</h4>
+                  <p>For example purposes, we will create a user called John.</p>
+                  <code>adduser john 
+                  </code><br>
+                  <p class="margin-top">Enter your desired password for this user. Fill in the information. This step is optional. Press enter to skip.  
+                  </p>
+                  <p >Add this user to group sudo
+                  </p>
+                  <code>adduser john sudo 
+                  </code><br>
+                  <p class="margin-top">Now we can access the server with our newly created sudo user. 
+                  </p>
+                  <code>ssh john@139.162.234.241
+                  </code><br>
+              </div>
+              <br><br>
+              <div>
+                  <h4>Install Uncomplicated Firewall</h4>
+                  <p>Installation</p>
+                  <code> sudo apt-get install ufw
+                  </code><br>
+                  <p class="margin-top">Allow all outgoing access and deny all incoming access
+                  </p>
+                  <code>sudo ufw default allow outgoing 
+                  </code><br>
+                  <code>sudo ufw default deny incoming
+                  </code><br>
+                  <p class="margin-top">Allow SSH and HTTP 
+                  </p>
+                  <code>sudo ufw allow ssh
+                  </code><br>
+                  <p class="margin-top">Refresh and check status.
+                  </p>
+                  <code>sudo ufw enable 
+                  </code><br>
+                  <code>sudo ufw status
+                  </code><br>
+              </div>
+
+              <br><br>
+              <div>
+                  <h4>Clone project folder from github</h4>
+                  <p>At the root directory of our server, copy the link from github and clone. </p>
+                  <code>git clone https://github.com/UCLComputerScience/COMP0016_2020_21_Team4.git
+                  </code><br>
+              </div>
+
+              <br><br>
+              <div>
+                  <h4>Create Virtual Environment in Server</h4>
+                  <p>Installation. </p>
+                  <code>sudo apt-get install python3-pip 
+                  </code><br>
+                  <code>sudo apt-get install python3-venv
+                  </code><br>
+                  <p class="margin-top">Create a virtual environment and let’s call it “venv”. Let's place it under our django project,
+                      for our case, 'COMP0016_2020_21_Team4/src'
+                  </p>
+                  <code>python3 -m venv src/venv
+                  </code><br>
+    
+                  <p class="margin-top">Activate the virtual environment (you must be in the directory where the “venv” file is placed)
+                  </p>
+                  <code>source venv/bin/activate
+                  </code><br>
+                  <p class="margin-top">Install all the packages listed in the 'requirements.txt'. This file is placed under src/
+                  </p>
+                  <code>pip3 install -r requirements.txt
+                  </code><br>
+                  <p class="margin-top">Be sure to check that 'src/ideas_portal/settings.py' contains our IP address under ALLOWED_HOST.  
+              </div>
+
+              <br><br>
+              <div>
+                  <h4>Setup Apache web server</h4>
+                  <p>Installation</p>
+                  <code>sudo apt-get install apache2 
+                  </code><br>
+                  <code>sudo apt-get install libapache2-mod-wsgi-py3
+                  </code><br>
+                  <p class="margin-top">To configure our apache web server, we need to make a copy of the default configuration file and make changes to that. Let’s call our new configuration file “django-project.conf”
+                  </p>
+                  <code>cd /etc/apache2/sites-available/
+                  </code><br>
+                  <code>sudo cp 000-default.conf django-project.conf
+                  </code><br>
+                  <p class="margin-top">Edit the newly created conf file “django-project.conf” 
+                  </p>
+                  <code>sudo nano django-project.conf
+                  </code><br>
+                  <p class="margin-top">Add the following lines to configuration file. This is to map the ‘static’ folder with our
+                      django’s static folder and map the “media” folder with our django’s media files. (make sure to save when you exit)
+                  </p>
+                  <img src="assets/appendics/config-apache.png" class="image">
+                  <p class="margin-top">Enable our site through apache and disable the default configuratio file.
+                  </p>
+                  <code>sudo a2ensite django-project 
+                  </code><br>
+                  <code>sudo a2dissite 000-default.conf
+                  </code><br>
+            
+              </div>
+
+              <br><br>
+              <div>
+                  <h4>Giving Apache access</h4>
+                  <p >Making apache the group owner of the “db.sqlite3” file</p>
+                  <code>sudo chown :www-data src/db.sqlite3
+                  </code><br>
+                  <code>sudo  chmod 664 src/db.sqlite3 
+                  </code><br>
+
+                  <p class="margin-top">Make apache the group owner of the parent directory. We set read and write permissions to the group. </p>
+                  <code>sudo chown :www-data src/
+                  </code><br>
+                  <code>sudo chmod 775 src/
+                  </code><br>
+
+                  <p class="margin-top">Give apache access to the media files 
+                  </p>
+                  <code>sudo chown -R :www-data src/media-root 
+                  </code><br>
+                  <code>sudo chmod 775 src/media-root
+                  </code><br>
+
+                  <p class="margin-top">Placing sensitive information into a config file. Create config file and let’s call it “config.json” 
+
+                  </p>
+                  <code>sudo touch /etc/config.json
+                  </code><br>
+                  <p class="margin-top">Include the following information “SECRET_KEY”, “EMAIL_USER”, “EMAIL_PASS”, “UCL_CLIENT_SECRET” 
+
+                  </p>
+                  <p class="margin-top">Allow HTTP access
+                  </p>
+                  <code>sudo ufw allow http/tcp 
+                  </code><br>
+
+                  <p class="margin-top">Restart apache server 
+                  </p>
+                  <code>sudo service apache2 restart
+                  </code><br>
+
+                  <p class="margin-top">To read error messages 
+                  </p>
+                  <code>sudo nano /var/log/apache2/error.log
+                  </code><br>
+        
+            
+              </div>
+
+              <br><br>
+              <div>
+                  <h4>Enabling encrypted HTTPS</h4>
+                  <p >Prerequisite is to have a fully registered domain name. </p>
+                  <p> Installing certbot</p>
+                  <code>sudo apt install certbot python3-certbot-apache
+                  </code><br>
+                  <p class="margin-top">Checking your Apache Virtual Host Configuration </p>
+                  <code>sudo nano /etc/apache2/sites-available/your_domain.conf
+                  </code><br>
+
+                  <p class="margin-top">Find the existing ServerName and ServerAlias lines.Make changes to match your domain name.        
+                  </p>
+                  <img src="assets/appendics/https-domain-name.png" class="image">
+
+                  <p >Validate your changes
+                  </p>
+                  <code>sudo apache2ctl configtest
+                  </code><br>
+                  <p class="margin-top">Once your configuration file’s syntax is correct, reload Apache so that the changes take effect:
+                  <code>sudo systemctl reload apache2
+                  </code><br>
+
+                  <p class="margin-top">Allowing HTTPS Through the Firewall. Check your status
+                  </p>
+                  <code>sudo ufw status
+                  </code><br>
+
+                  <p class="margin-top">To additionally let in HTTPS traffic, allow the “Apache Full” profile and delete the redundant “Apache” profile:
+
+                  </p>
+                  <code>sudo ufw allow 'Apache Full'
+                  </code><br>                    
+                  <code>sudo ufw delete allow 'Apache'
+                  </code><br>
+        
+                  <p class="margin-top">Obtaining an SSL Certificate. The Apache plugin will take care of reconfiguring Apache and reloading the configuration whenever necessary
+
+
+                  </p>
+                  <code>sudo certbot --apache
+                  </code><br>                    
+                  <p class="margin-top">It will ask you for a valid e-mail address
+                  </p>
+                  <img src="assets/appendics/https-valid-email.png" class="image">
+
+                  <p class="margin-top">Confirm if you agree to Let’s Encrypt terms of service
+                  </p>
+                  <img src="assets/appendics/https-terms.png" class="image">
+
+                  <p class="margin-top">You’ll be asked if you would like to share your email with the Electronic Frontier Foundation to receive news and other information.
+
+                  </p>
+                  <img src="assets/appendics/https-news.png" class="image">
+              
+                  <p class="margin-top">Decide which domains you’d like to activate HTTPS for. 
+                      If you’d like to enable HTTPS for all listed domain names (recommended), you can leave the prompt blank and hit ENTER to proceed
+                      
+
+                  </p>
+                  <img src="assets/appendics/https-select-domain.png" class="image">
+
+                  <p class="margin-top">You’ll be prompted to select whether or not you want HTTP traffic redirected to HTTPS. Choose 2 to enable the redirection, or 1 if you want to keep both HTTP and HTTPS as separate methods of accessing your website.
+                  </p>
+                  <img src="assets/appendics/https-http.png" class="image">
+                  
+                  <p class="margin-top">
+                  <p class="margin-top">After this step, Certbot’s configuration is finished
+                      Try reloading your website using https://
+                  </p>
+                  
+                  <p class="margin-top">Verifying Certbot Auto-Renewal. To check the status of this service
+                  </p>
+                  <code> sudo systemctl status certbot.timer
+                  </code><br>
+                  <p class="margin-top">To test the renewal process, you can do a dry run with certbot:
+                  </p>
+                  <code> sudo certbot renew --dry-run
+                  </code><br>
+              </div>
+          </div>
+          </div>
+          </div>
+    </section>
+
+    <section id="about" class="about">
+      <div class="container">
           <div class="row">
-            <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3 id="deploy">Deployment Guide</h3>
-                <p>Our portal is currently hosted with a Linode Server. The instructions below will show the steps needed to deploy it on LInode specifically. </p>
-                <p>At the homepage of the server, there will be a ssh access command presented. Copy that and paste it in your terminal. In our case, it is the line below: </p>
-                <code >ssh root@139.162.234.241</code>
-                <br><br>
-                <div>
-                    <h4>Hostname</h4>
-                    <p class="margin-top">Once accessed, check for any new updates and change the host name to “django-server”.
-                    </p>
-                    <code>apt-get update && apt-get upgrade</code><br>
-                    <code>hostnamectl set-hostname django-server</code>
-                    <p class="margin-top">Add hostname to the list of hosts
-                    </p>
-                    <code>Nano /etc/hosts                </code><br>
-                    <p class="margin-top">Insert your ip address and your host name (django-server) below the already-available
-                        localhost. </p>
-                    <img src="assets/appendics/hosts.png" class="image">
-                </div>
-                <br><br>
-                <div>
-                    <h4>Create a limit user</h4>
-                    <p>For example purposes, we will create a user called John.</p>
-                    <code>adduser john 
-                    </code><br>
-                    <p class="margin-top">Enter your desired password for this user. Fill in the information. This step is optional. Press enter to skip.  
-                    </p>
-                    <p >Add this user to group sudo
-                    </p>
-                    <code>adduser john sudo 
-                    </code><br>
-                    <p class="margin-top">Now we can access the server with our newly created sudo user. 
-                    </p>
-                    <code>ssh john@139.162.234.241
-                    </code><br>
-                </div>
-                <br><br>
-                <div>
-                    <h4>Install Uncomplicated Firewall</h4>
-                    <p>Installation</p>
-                    <code> sudo apt-get install ufw
-                    </code><br>
-                    <p class="margin-top">Allow all outgoing access and deny all incoming access
-                    </p>
-                    <code>sudo ufw default allow outgoing 
-                    </code><br>
-                    <code>sudo ufw default deny incoming
-                    </code><br>
-                    <p class="margin-top">Allow SSH and HTTP 
-                    </p>
-                    <code>sudo ufw allow ssh
-                    </code><br>
-                    <p class="margin-top">Refresh and check status.
-                    </p>
-                    <code>sudo ufw enable 
-                    </code><br>
-                    <code>sudo ufw status
-                    </code><br>
-                </div>
-
-                <br><br>
-                <div>
-                    <h4>Clone project folder from github</h4>
-                    <p>At the root directory of our server, copy the link from github and clone. </p>
-                    <code>git clone https://github.com/UCLComputerScience/COMP0016_2020_21_Team4.git
-                    </code><br>
-                </div>
-
-                <br><br>
-                <div>
-                    <h4>Create Virtual Environment in Server</h4>
-                    <p>Installation. </p>
-                    <code>sudo apt-get install python3-pip 
-                    </code><br>
-                    <code>sudo apt-get install python3-venv
-                    </code><br>
-                    <p class="margin-top">Create a virtual environment and let’s call it “venv”. Let's place it under our django project,
-                        for our case, 'COMP0016_2020_21_Team4/src'
-                    </p>
-                    <code>python3 -m venv src/venv
-                    </code><br>
-      
-                    <p class="margin-top">Activate the virtual environment (you must be in the directory where the “venv” file is placed)
-                    </p>
-                    <code>source venv/bin/activate
-                    </code><br>
-                    <p class="margin-top">Install all the packages listed in the 'requirements.txt'. This file is placed under src/
-                    </p>
-                    <code>pip3 install -r requirements.txt
-                    </code><br>
-                    <p class="margin-top">Be sure to check that 'src/ideas_portal/settings.py' contains our IP address under ALLOWED_HOST.  
-                </div>
-
-                <br><br>
-                <div>
-                    <h4>Setup Apache web server</h4>
-                    <p>Installation</p>
-                    <code>sudo apt-get install apache2 
-                    </code><br>
-                    <code>sudo apt-get install libapache2-mod-wsgi-py3
-                    </code><br>
-                    <p class="margin-top">To configure our apache web server, we need to make a copy of the default configuration file and make changes to that. Let’s call our new configuration file “django-project.conf”
-                    </p>
-                    <code>cd /etc/apache2/sites-available/
-                    </code><br>
-                    <code>sudo cp 000-default.conf django-project.conf
-                    </code><br>
-                    <p class="margin-top">Edit the newly created conf file “django-project.conf” 
-                    </p>
-                    <code>sudo nano django-project.conf
-                    </code><br>
-                    <p class="margin-top">Add the following lines to configuration file. This is to map the ‘static’ folder with our
-                        django’s static folder and map the “media” folder with our django’s media files. (make sure to save when you exit)
-                    </p>
-                    <img src="assets/appendics/config-apache.png" class="image">
-                    <p class="margin-top">Enable our site through apache and disable the default configuratio file.
-                    </p>
-                    <code>sudo a2ensite django-project 
-                    </code><br>
-                    <code>sudo a2dissite 000-default.conf
-                    </code><br>
-             
-                </div>
-
-                <br><br>
-                <div>
-                    <h4>Giving Apache access</h4>
-                    <p >Making apache the group owner of the “db.sqlite3” file</p>
-                    <code>sudo chown :www-data src/db.sqlite3
-                    </code><br>
-                    <code>sudo  chmod 664 src/db.sqlite3 
-                    </code><br>
-
-                    <p class="margin-top">Make apache the group owner of the parent directory. We set read and write permissions to the group. </p>
-                    <code>sudo chown :www-data src/
-                    </code><br>
-                    <code>sudo chmod 775 src/
-                    </code><br>
-
-                    <p class="margin-top">Give apache access to the media files 
-                    </p>
-                    <code>sudo chown -R :www-data src/media-root 
-                    </code><br>
-                    <code>sudo chmod 775 src/media-root
-                    </code><br>
-
-                    <p class="margin-top">Placing sensitive information into a config file. Create config file and let’s call it “config.json” 
-
-                    </p>
-                    <code>sudo touch /etc/config.json
-                    </code><br>
-                    <p class="margin-top">Include the following information “SECRET_KEY”, “EMAIL_USER”, “EMAIL_PASS”, “UCL_CLIENT_SECRET” 
-
-                    </p>
-                    <p class="margin-top">Allow HTTP access
-                    </p>
-                    <code>sudo ufw allow http/tcp 
-                    </code><br>
-
-                    <p class="margin-top">Restart apache server 
-                    </p>
-                    <code>sudo service apache2 restart
-                    </code><br>
-
-                    <p class="margin-top">To read error messages 
-                    </p>
-                    <code>sudo nano /var/log/apache2/error.log
-                    </code><br>
-         
-             
-                </div>
-
-                <br><br>
-                <div>
-                    <h4>Enabling encrypted HTTPS</h4>
-                    <p >Prerequisite is to have a fully registered domain name. </p>
-                    <p> Installing certbot</p>
-                    <code>sudo apt install certbot python3-certbot-apache
-                    </code><br>
-                    <p class="margin-top">Checking your Apache Virtual Host Configuration </p>
-                    <code>sudo nano /etc/apache2/sites-available/your_domain.conf
-                    </code><br>
-
-                    <p class="margin-top">Find the existing ServerName and ServerAlias lines.Make changes to match your domain name.        
-                    </p>
-                    <img src="assets/appendics/https-domain-name.png" class="image">
-
-                    <p >Validate your changes
-                    </p>
-                    <code>sudo apache2ctl configtest
-                    </code><br>
-                    <p class="margin-top">Once your configuration file’s syntax is correct, reload Apache so that the changes take effect:
-                    <code>sudo systemctl reload apache2
-                    </code><br>
-
-                    <p class="margin-top">Allowing HTTPS Through the Firewall. Check your status
-                    </p>
-                    <code>sudo ufw status
-                    </code><br>
-
-                    <p class="margin-top">To additionally let in HTTPS traffic, allow the “Apache Full” profile and delete the redundant “Apache” profile:
-
-                    </p>
-                    <code>sudo ufw allow 'Apache Full'
-                    </code><br>                    
-                    <code>sudo ufw delete allow 'Apache'
-                    </code><br>
-         
-                    <p class="margin-top">Obtaining an SSL Certificate. The Apache plugin will take care of reconfiguring Apache and reloading the configuration whenever necessary
-
-
-                    </p>
-                    <code>sudo certbot --apache
-                    </code><br>                    
-                    <p class="margin-top">It will ask you for a valid e-mail address
-                    </p>
-                    <img src="assets/appendics/https-valid-email.png" class="image">
-
-                    <p class="margin-top">Confirm if you agree to Let’s Encrypt terms of service
-                    </p>
-                    <img src="assets/appendics/https-terms.png" class="image">
-
-                    <p class="margin-top">You’ll be asked if you would like to share your email with the Electronic Frontier Foundation to receive news and other information.
-
-                    </p>
-                    <img src="assets/appendics/https-news.png" class="image">
-                
-                    <p class="margin-top">Decide which domains you’d like to activate HTTPS for. 
-                        If you’d like to enable HTTPS for all listed domain names (recommended), you can leave the prompt blank and hit ENTER to proceed
-                       
-
-                    </p>
-                    <img src="assets/appendics/https-select-domain.png" class="image">
-
-                    <p class="margin-top">You’ll be prompted to select whether or not you want HTTP traffic redirected to HTTPS. Choose 2 to enable the redirection, or 1 if you want to keep both HTTP and HTTPS as separate methods of accessing your website.
-                    </p>
-                    <img src="assets/appendics/https-http.png" class="image">
+              <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+                  <h3 id="license">Legal Issues </h3><br>
+                  <b>
+                    The software is an early proof of concept for development purposes and should not
+                    be used as-is in a live environment without further redevelopment and/or testing.
+                    No warranty is given and no real data or personally identifiable data should be
+                    stored. Usage and its liabilities are your own.
+                  </b>
+                  <br>
+                  <br>
+                  <p>These are all libraries and Technologies used in our portal.</p>
+                  
+                  <div class="row">
+                    <!-- insert legal statements here -->
+                    <table>
+                      <tr>
+                          <th>Name</th>
+                          <th>Version</th>
+                          <th>License</th>
+                      </tr>
+                      <tr>
+                          <td>Django</td>
+                          <td>3.1.3</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>Pillow</td>
+                          <td>8.0.1</td>
+                          <td>Historical Permission Notice and Disclaimer (HPND)</td>
+                      </tr>
+                      <tr>
+                          <td>PyJWT</td>
+                          <td>2.0.0</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>amqp</td>
+                          <td>5.0.5</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>asgiref</td>
+                          <td>3.3.1</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>billiard</td>
+                          <td>3.6.3.0</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>celery</td>
+                          <td>5.0.5</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>certifi</td>
+                          <td>2020.12.5</td>
+                          <td>Mozilla Public License 2.0 (MPL 2.0)</td>
+                      </tr>
+                      <tr>
+                          <td>cffi</td>
+                          <td>1.14.4</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>chardet</td>
+                          <td>4.0.0</td>
+                          <td>GNU Library or Lesser General Public License (LGPL)</td>
+                      </tr>
+                      <tr>
+                          <td>click</td>
+                          <td>7.1.2</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>click-didyoumean</td>
+                          <td>0.0.3</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>click-plugins</td>
+                          <td>1.1.1</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>click-repl</td>
+                          <td>0.1.6</td>
+                          <td>MIT</td>
+                      </tr>
+                      <tr>
+                          <td>coverage</td>
+                          <td>5.5</td>
+                          <td>Apache Software License</td>
+                      </tr>
+                      <tr>
+                          <td>cryptography</td>
+                          <td>3.3.1</td>
+                          <td>Apache Software License, BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>decorator</td>
+                          <td>4.4.2</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>defusedxml</td>
+                          <td>0.6.0</td>
+                          <td>Python Software Foundation License</td>
+                      </tr>
+                      <tr>
+                          <td>django-allauth</td>
+                          <td>0.44.0</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>django-autoslug</td>
+                          <td>1.9.8</td>
+                          <td>GNU Library or Lesser General Public License (LGPL)</td>
+                      </tr>
+                      <tr>
+                          <td>django-cas-ng</td>
+                          <td>4.1.1</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>django-crispy-forms</td>
+                          <td>1.10.0</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>django-environ</td>
+                          <td>0.4.5</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>django-model-utils</td>
+                          <td>4.1.1</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>django-notifications-hq</td>
+                          <td>1.6.0</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>django-redis</td>
+                          <td>4.12.1</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>django-tinymce</td>
+                          <td>3.2.0</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>djangorestframework</td>
+                          <td>3.12.2</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>idna</td>
+                          <td>2.10</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>imageio</td>
+                          <td>2.9.0</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>itsdangerous</td>
+                          <td>1.1.0</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>jsonfield</td>
+                          <td>3.1.0</td>
+                          <td>MIT</td>
+                      </tr>
+                      <tr>
+                          <td>kombu</td>
+                          <td>5.0.2</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>lxml</td>
+                          <td>4.6.2</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>oauthlib</td>
+                          <td>3.1.0</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>prompt-toolkit</td>
+                          <td>3.0.10</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>pycparser</td>
+                          <td>2.20</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>python-cas</td>
+                          <td>1.5.0</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>python3-openid</td>
+                          <td>3.2.0</td>
+                          <td>Apache Software License</td>
+                      </tr>
+                      <tr>
+                          <td>pytz</td>
+                          <td>2020.4</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>redis</td>
+                          <td>3.5.3</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>requests</td>
+                          <td>2.25.1</td>
+                          <td>Apache Software License</td>
+                      </tr>
+                      <tr>
+                          <td>requests-oauthlib</td>
+                          <td>1.3.0</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>sqlparse</td>
+                          <td>0.4.1</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>swapper</td>
+                          <td>1.1.2.post1</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>urllib3</td>
+                          <td>1.26.2</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>vine</td>
+                          <td>5.0.0</td>
+                          <td>BSD License</td>
+                      </tr>
+                      <tr>
+                          <td>wcwidth</td>
+                          <td>0.2.5</td>
+                          <td>MIT License</td>
+                      </tr>
+                      <tr>
+                          <td>webservices</td>
+                          <td>0.7</td>
+                          <td>BSD License</td>
+                      </tr>
+                    </table>
+                  </div>
+                  
+                  <div>
                     
-                    <p class="margin-top">
-                    <p class="margin-top">After this step, Certbot’s configuration is finished
-                        Try reloading your website using https://
+                    <br>
+                    <p>
+                      System developed by Shin Wen Yip, Jiaying Lin and James Ong.
                     </p>
-                    
-                    <p class="margin-top">Verifying Certbot Auto-Renewal. To check the status of this service
+                    <p>
+                      Clients and organisations: UCL (University College London) and NHS (National Health Service).
                     </p>
-                    <code> sudo systemctl status certbot.timer
-                    </code><br>
-                    <p class="margin-top">To test the renewal process, you can do a dry run with certbot:
+                    <p>
+                      Supervisors and Teaching Assistants: James Hardwick.
                     </p>
-                    <code> sudo certbot renew --dry-run
-                    </code><br>
-                </div>
-            </div>
-            </div>
-            </div>
-      </section>
+                  </div>
+                  
+
+              </div>
+          </div>
+      </div>
+    </section>
 
  
 
@@ -553,16 +845,21 @@
     </div>
 
     <div class="container footer-bottom clearfix">
-      <div class="copyright">
-        &copy; Copyright <strong><span>eNno</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/enno-free-simple-bootstrap-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
+        <div class="copyright">
+          &copy; Copyright 
+          <strong><span>eNno</span></strong>,
+          <strong><span>Shin Wen Yip</span></strong>,
+          <strong><span>Jiaying Lin</span></strong> and
+          <strong><span>James Ong</span></strong>.
+          All Rights Reserved
+        </div>
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/enno-free-simple-bootstrap-template/ -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
     </div>
   </footer><!-- End Footer -->
 
