@@ -434,6 +434,102 @@
 
                 <br><br>
                 <div>
+                    <h4>Setting up Redis and Celery </h4>
+                    <p >Celery is an asynchronous task queue that is used to run scheduled tasks in our project when dealing with changing the state of a challenge. Redis is an in-memory key-value store that is used as a message broker between the django project and the celery workers.</p>
+                    <p>Installing Redis </p>
+                    <code>sudo apt install redis-server
+                    </code><br>
+                  
+
+                    <p class="margin-top">Open the redis configuration file to make changes</p>
+                    <code>sudo nano /etc/redis/redis.conf
+                    </code><br>
+
+                    <p class="margin-top">Find the supervised directive.  change it from no to systemd since you are running Ubuntu, which uses the systemd init system.
+                    </p>
+                    <img src="assets/appendics/supervised.png" class="image">
+
+                    <p class="margin-top">Restart the Redis service to reflect the changes you made to the configuration file:
+
+                    </p>
+                    <code>sudo systemctl restart redis.service
+                    </code><br>
+                    <p class="margin-top">Start by checking that the Redis service is running:
+                    </p>
+                    <code>sudo systemctl status redis
+                    </code><br>
+
+                    <p class="margin-top">If redis is running, it will show the following status
+                    </p>
+                    <img src="assets/appendics/redis-active.png" class="image">
+
+                    <p class="margin-top">Connect to the server and test connectivity. It will return “PONG” if successful. 
+                    </p>
+                    <code>redis-cli
+                    </code><br>
+                    <code>ping
+                    </code><br>
+                    <p class="margin-top">To exit server:             </p>
+                    <code>exit
+                    </code><br>                   
+                    <p class="margin-top">Binding to local host to increase security. Open the configuration file: 
+                    </p>
+                    <code>sudo nano /etc/redis/redis.conf
+                    </code><br>
+                    <p class="margin-top">Locate this line “bind 127.0.0.1 ::1” and make sure it is uncommented 
+
+                    </p>
+                    <p class="margin-top">Restart the Redis service to register changes:
+                    </p>
+                    <code>sudo systemctl restart redis
+                    </code><br>
+                    <p class="margin-top">Install handy networking tools 
+                    </p>
+                    <code>sudo apt install net-tools
+                    </code><br>
+                    <p class="margin-top">Check if configuration changes to redis has taken effect
+                    </p>
+                    <code>sudo netstat -lnp | grep redis
+                    </code><br>
+
+                    <p class="margin-top">After setting up redis, install supervisor needed for celery: 
+                    </p>
+                    <code>sudo netstat -lnp | grep redis
+                    </code><br>
+
+                    <p class="margin-top">Check if configuration changes to redis has taken effec
+                    </p>
+                    <code>sudo apt-get install supervisor
+                    </code><br>
+             
+                    <p class="margin-top">In the github repository, there is a directory “supervisor” which contains “ideas_portal_celery”
+                      and “ideas_portal_beatcelery”. Copy these files to the remote server in the “/etc/supervisor/conf.d/” directory.
+                    </p>
+                    <p class="margin-top">Create the log files:   </p>
+                    <code>touch /var/log/celery/ideas_portal_worker.log
+                    </code><br>
+                    <code>touch /var/log/celery/ideas_portal_beat.log
+                    </code><br>
+
+                    <p class="margin-top">Run the following commands to make Supervisor aware of the programs
+                    </p>
+                    <code>sudo supervisorctl reread
+                    </code><br>
+                    <code>sudo supervisorctl update
+                    </code><br>
+
+                    <p class="margin-top">Run the following commands to stop, start, and/or check the status of a program. Replace "program_name" with ideas_portal_celery and ideas_portal_beatcelery. 
+                    </p>
+                    <code>sudo supervisorctl stop "program_name" 
+                    </code><br>
+                    <code>sudo supervisorctl start "program_name" 
+                    </code><br>
+                    <code>sudo supervisorctl status "program_name" 
+                    </code><br>
+                </div>
+
+                <br><br>
+                <div>
                     <h4>Enabling encrypted HTTPS</h4>
                     <p >Prerequisite is to have a fully registered domain name. </p>
                     <p> Installing certbot</p>
