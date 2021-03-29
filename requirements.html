@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Idea4U Portal</title>
+  <title>eNno Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -34,6 +34,15 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    #s1,#s2,#s3 {
+  object-position: left top;
+    }
+    #tr { height: 21px; }
+    #id { width: 3.2687%; height: 21px; }
+    #req { width: 74.7536%; height: 21px; }
+    #priority { width: 16.6284%; height: 21px; }            
+  </style>
 </head>
 
 <body>
@@ -59,7 +68,12 @@
           <li><a href="implementation.html">Implementation</a></li>
           <li><a href="testing.html">Testing</a></li>
           <li><a href="evaluation.html">Evaluation</a></li>
-          <li><a href="appendices.html">Appendices</a></li>
+          <li class="drop-down"><a href="">Appendices</a>
+            <ul>
+              <li><a href="appendices.html#usermanual">User Manual</a></li>
+              <li><a href="appendices.html#deploy">Deployment Guide</a></li>
+            </ul>
+          </li>
 
         </ul>
       </nav><!-- .nav-menu -->
@@ -80,8 +94,9 @@
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Project Background </h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              <strong>Idea4U</strong> is an idea management website designed for UCL and NHS.
+              It aims to provide a <strong>web-based idea-crowd-sourcing</strong> application that allows external 
+              stakeholders to interact with the challenges that UCL/NHS trying to solve.
             </p>
           </div>
         </div>
@@ -94,8 +109,27 @@
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Project Goals </h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              The main goals of our project include trying to <strong>maximize employee engagement</strong> 
+              on idea contribution. Employee ideas can be a powerful driver of 
+              improvements and innovation within any company. Most great ideas for enhancing 
+              and achieving business growth come from employees who are interacting with clients. 
+              They will have ideas/feedback on how to improve processes, customer service, 
+              product design or even some operational suggestions. Thus, we have to encourage 
+              engagement of employees.
+            </p>
+            <p>
+              We also need to be able to <strong>address a specific problem area</strong> by 
+              posting challenges to quickly capture and manage useful problem solving strategies
+              from users.
+            </p>
+            <p>
+              Another goal is having the ability to <strong>manage and organise feedback/ideas collected efficiently</strong> so that
+              the better ideas with higher demands can be prioritised for planning and 
+              implementation.
+            </p>
+            <p>
+              We believe our application will help foster innovation and provide an efficient 
+              way to test UCL/IXN approach.
             </p>
           </div>
         </div>
@@ -108,11 +142,86 @@
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Requirements Gathering </h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              In the first step of discovering requirements for our project, we arranged a semi-structured interview with our clients to gather information on their goals, needs and context of use.
+              By asking open-ended questions, we managed to capture more in depth information on the background of our users
+              and the basic requirements of our project.
+              In subsequent weekly meetings, we clarified
+              any ambiguities and made the final MosCow list.
             </p>
+            <a></a>
+            <p>Following is a sample of questions we asked during the interview:</p>
+            <ol>
+              <li>What are the current ways of sourcing ideas in UCL and NHS?</li>
+              <li>What would be the main functionalities/features of this portal?</li>
+              <li>Who are the main users of this portal?</li>
+              <li>In your opinion, what would be the perfect outcome of this project?</li>
+            </ol>
+            <br>
+            <p class="h5">Using Interview : </p>
+            <table style="border-collapse: collapse; width: 100%; margin-left: auto; margin-right: auto;" border="1" cellspacing="1" cellpadding="20px">
+              <tbody>
+              <tr>
+              <td style="width: 98.1844%;">
+                <p>From UCL Researcher:</p>
+              <p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in; direction: ltr; unicode-bidi: embed; word-break: normal;"><span style="font-size: 10pt; font-family: Calibri; font-weight: bold;">1.What are the current ways of sourcing ideas in&nbsp;UCL and what are the problems encountered?</span></p>
+              <span style="font-size: 10pt;"> </span>
+              <p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in; direction: ltr; unicode-bidi: embed; word-break: normal;"><span style="font-size: 10pt;"><span style="font-family: Calibri;">For our current research</span><span style="font-family: Calibri;">es, we source ideas for a problem from a closed group of students using community forums and UCL extend. I hope to open these challenges to the public so they can engage with these problems and cocreate solutions. I have considered third party software's, but it is expensive due to the large number of user accounts that need to be created if we open to the public. </span></span></p>
+              <span style="font-size: 10pt;"> </span>
+              <p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in; direction: ltr; unicode-bidi: embed; word-break: normal;">&nbsp;</p>
+              <span style="font-size: 10pt;"> </span>
+              <p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in; direction: ltr; unicode-bidi: embed; word-break: normal;"><span style="font-size: 10pt; font-family: Calibri; font-weight: bold;">2. What functionalities are you looking for in this portal?</span></p>
+              <span style="font-size: 10pt;"> </span>
+              <p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in; direction: ltr; unicode-bidi: embed; word-break: normal;"><span style="font-size: 10pt; font-family: Calibri;">We need to consider how to cope with the responses that we get, by having the public to vote on other people&rsquo;s ideas, preferably according to some attributes such as efficiency, cost effectiveness and if idea is timely. Public should also be allowed to comment on ideas.</span></p>
+              <span style="font-size: 10pt;"> </span>
+              <p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in; direction: ltr; unicode-bidi: embed; word-break: normal;"><span style="font-size: 10pt; font-family: Calibri;">To nudge people to interact with ideas, it would be nice to have a point system or leaderboard where contributors can be credited whenever they submit an idea, vote or comment on ideas. </span></p>
+              <span style="font-size: 10pt;"> </span>
+              <p style="margin-top: 0pt; margin-bottom: 0pt; margin-left: 0in; direction: ltr; unicode-bidi: embed; word-break: normal;"><span style="font-size: 10pt; font-family: Calibri;">We can also have external moderators like experts from different industries related to the challenge to help evaluate the idea.</span></p>
+              </td>
+              </tr>
+              </tbody>
+              </table>
           </div>
         </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <div class="modal fade bd-example-modal-lg show" id="s1" role="dialog">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" id="dynamic-content">
+                    <img src="assets/img/survey1.jpg" class="img-fluid" style="margin-left: 100px;margin-right: auto;" alt="" />
+                    <img src="assets/img/survey3.jpg" class="img-fluid" style="margin-left: auto;margin-right: auto;" alt="" />
+                    <img src="assets/img/survey2.jpg" class="img-fluid" style="margin-left: auto;margin-right: auto;" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <br><br>
+            <p class="h5">Using Questionnaires : </p>
+            <img href="#s1" data-toggle="modal" src="assets/img/survey1.jpg" id="s1" style="width:200px;height:200px;object-fit: cover;float: left; padding: 40px;" alt="">
+            <p><br>
+              After discovering requirements of challenge publishers, we move on to gather information from potential idea contributors by sending out questionnaires to collect quantitative and statistical data on the preference of features and design of the portal. 
+              <b>Likert scale questionnaires</b> are used so that data can be easily analyzed by transforming them into statistical graphs.
+
+            </p><small style="float:inline-start;"> <<  Click to view questionnaire screenshot</small>
+            <br><br>
+            <p class="h6">Example Results : </p>
+            <div>
+              <img src="assets/img/survey4.png" style="width:200px; margin-left: 50px;padding: 20px;" alt="">
+              <img src="assets/img/survey5.png" style="width:500px" alt="">
+              <img src="assets/img/survey6.png" style="width:500px; margin-left: 250px;" alt=""><br></br>
+            </div>
+          </div>
+          
+        </div>
+        
       </div>
     </section>
 
@@ -122,9 +231,12 @@
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>Personas </h3>
             <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
+              We then created personas and scenarios based on the collected user data to represent the users’ motivation and behaviors. 
+              This allowed us to have a clear vision of the type of users and avoid having a self-referential design instead of user centered design.
+              <br>
             </p>
+            <img src="assets/img/persona1.png" style="width:800px" alt=""><br></br>
+            <img src="assets/img/persona2.png" style="width:800px" alt=""><br></br>
           </div>
         </div>
       </div>
@@ -133,11 +245,8 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-            <h3>User Case List </h3>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+            <h3>User Case Diagram</h3>
+            <img src="assets/img/use_case_diagram.jpg" style="width:900px" alt=""><br></br>
           </div>
         </div>
       </div>
@@ -147,12 +256,115 @@
         <div class="row">
           <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
             <h3>MOSCOW List</h3>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur.
-            </p>
+            <h4 style="text-align: center;">Functional Requirements</h4><br>
+            <!-- <p style="color: blue;">Non-functional requirements in blue.</p> -->
+            <table style="border-collapse: collapse; width: 100%;background-color:rgb(247, 201, 201)" border="0" cellpadding="30px">
+              <tbody>
+                <tr>
+                  <td>
+                    <b><u>MUST HAVE</u></b>
+                    <ol>
+                      <li>Ideas can be created, retrieved, updated and deleted (CRUD)</li>
+                      <li>Challenges can be created, retrieved, updated and deleted (CRUD)</li>
+                      <li>
+                        Every user has an user profile (name, description, points, submitted ideas,
+                        subscribed challenges)
+                      </li>
+                      <li>
+                        UCL students and staffs can login by UCL SSO (Single Sign On) with
+                        UCL account credentials.
+                      </li>
+                      <li>
+                        Timeline for each challenge (publishing date, Ideas phase, voting phase,
+                        evaluation phase, feedback phase) 
+                      </li>
+                      <li>Every registered user can vote ideas. Every single vote has equal weightage. </li>
+                      <li>Moderators evaluate the ideas based on criterias. </li>
+                      <li>Leaderboard</li>
+                      <li>Ideas/challenges are sorted based on popularity (number of votes/ideas) or date-posted</li>
+                      <li>
+                        Notification engine
+                        <ul>
+                          <li>
+                            - To notify users on interactions on their idea,
+                            updates on subscribed challenges and new challenges
+                          </li>
+                          <li>
+                            - To notify moderators when an idea is posted for reviewing
+                          </li>
+                        </ul>
+                      </li>
+                      <li>Permissions for different type of users (common user, moderator and administrator)</li>
+                      <!-- <li style="color: blue;">The project mush be security to store user data</li>
+                          <li style="color: blue;">The project mush be well-documented</li>
+                          <li style="color: blue;">The code review video must be understood by a first year MSc student</li> -->
+                    </ol>
+                    <b><u>SHOULD HAVE</u></b>
+                    <ol>
+                      <li>Allow commenting on ideas  </li>
+                      <li>Allow stakeholders to subscribe to a challenge to get updates  </li>
+                      <li>Invitation to evaluate ideas</li>
+                    </ol>
+                    <b><u>COULD HAVE</u></b>
+                    <ol>
+                      <li>Save idea/challenge drafts and edit later</li>
+                      <li>Challenges can be set to public or private</li>
+                      <li>Community guidelines for website</li>
+                      <li>Classify challenges and ideas by tags </li>
+                    </ol>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content"><br><br>
+            <h4 style="text-align: center;">Non-Functional Requirements</h4><br>
+            <table style="border-collapse: collapse; width: 100%; height: 147px;background-color: #c6fffe; border-color: #95A5A6;" border="0" cellpadding="10px">
+              <tbody>
+              <tr id="tr">
+              <td id="id" ><b>ID</b></td>
+              <td id="req"><b>Requirement</b></td>
+              <td id="priority"><b>Priority</b></td>
+              </tr>
+              <tr id="tr">
+              <td id="id">1.</td>
+              <td id="req">User account credentials should be stored securely (not 3rd party authentication)</td>
+              <td id="priority">Must have</td>
+              </tr>
+              <tr id="tr">
+              <td id="id">2.</td>
+              <td id="req">Project should be well documented</td>
+              <td id="priority">Must have</td>
+              </tr>
+              <tr id="tr">
+              <td id="id">3.</td>
+              <td id="req">Software should be scalable&nbsp;</td>
+              <td id="priority">Must have</td>
+              </tr>
+              <tr id="tr">
+              <td id="id">4.</td>
+              <td id="req">Software should be compatible with most major operating systems/browser</td>
+              <td id="priority">Must have</td>
+              </tr>
+              <tr id="tr">
+              <td id="id">5.</td>
+              <td id="req">Software should be extensible to add new functionalities in the future</td>
+              <td id="priority">Must have</td>
+              </tr>
+              <tr id="tr">
+              <td id="id">6.</td>
+              <td id="req">Code review should be understandable by a first year MSc student</td>
+              <td id="priority">Must have</td>
+              </tr>
+              </tbody>
+              </table>
+
+
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -171,18 +383,14 @@
 
         <div class="row  justify-content-center">
           <div class="col-lg-6">
-            <h3>eNno</h3>
-            <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi
-              placeat.</p>
+            <h3>Idea4U</h3>
+            <p>Platform to crowdsource and manage ideas</p>
           </div>
         </div>
 
         <div class="social-links">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          <a href="https://youtu.be/B1VWd8H5SyM" class="youtube"><i class="bx bxl-youtube"></i></a>
+
         </div>
 
       </div>
