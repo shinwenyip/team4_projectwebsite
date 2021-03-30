@@ -74,16 +74,35 @@
 
   <main id="main">
     
+
+
     <section id="breadcrumbs" class="breadcrumbs">
       <div class="container"> 
         <h2>Research</h2>
       </div>
     </section>
     <section id="about" class="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
+            <h3>Overview</h3>
+            <p>
+              Since there are many existing Idea Management Platforms already available out there, this research section will
+              start by looking at the two platforms that our clients are currently using: IdeaDrop and Crowdicity. Due to the
+              fact that this is a brand new project, we will have the liberty to select the different technologies we are
+              going to use. We will discuss why we chose a python web framework and why Django ended being our final choice.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about" class="about">
         <div class="container">
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
-              <h3>Existing Solutions </h3>
+              <h3>IdeaDrop vs Crowdicity, and What we can Learn From Them</h3>
+              <h4>Similarities 
+              </h4>
               <p>
                 There are two highly related platforms that our clients UCL and NHS are eying at or are currently using:
                 Crowdicity and IdeaDrop. These two platforms have their similarity and differences that we are going to analyse.
@@ -94,6 +113,7 @@
                 IdeaDrop. To increase collaboration, users will be able to write comments and tag other users. Both platforms
                 come with mobile applications to increase accessibility. [1][2]
               </p>
+              <h4>Differences</h4>
               <p>
                 However, each of them have their own perks. In Crowdicity, the lifetime of a challenge will go through a
                 pipeline with different stages designed by the moderator. Moderators will also set criterias to capture what
@@ -108,6 +128,7 @@
                 Crowdicity provides multiple options to do so such as a point system, a voting system, a liking system and a
                 star rating system. IdeaDrop, however, evaluates ideas based on a score. [1][2]
               </p>
+              <h4>Insights</h4>
               <p>
                 Each of them have their own touch to idea management, challenge management and collaboration practices.
                 Features, such as the keyword filtering of ideas and challenges and the user score system, are deemed quite
@@ -122,17 +143,16 @@
         </div>
       </section>
 
+
       <section id="about" class="about">
         <div class="container">
           <div class="row">
             <div class="col-lg-9 pt-4 pt-lg-0 offset-lg-1 content">
               <h3>Related Technologies</h3>
+              <h4>Desktop Application vs Web Application vs Mobile Application </h4>
               <p>
                 The possible solutions of implementing an idea management portal is to have a desktop application, a web
-                application, a mobile application or all of the above.
-              </p>
-              <p>
-                One of the main focuses of the project is to build a product with hgh accessibility. Desktop applications and mobile
+                application, a mobile application or all of the above. One of the main focuses of the project is to build a product with hgh accessibility. Desktop applications and mobile
                 applications would provide better user experience as users would not need a browser to access the platform. However,
                 deploying different forms of the platform will require more development time. In terms of accessibility, web
                 applications can be accessed by anything with a browser: desktop and mobile device. On the other hand, mobile
@@ -148,7 +168,7 @@
                 Python: Django and Flask. According to the Python Developers Survey 2020, these two frameworks are the most popular
                 among other python frameworks that python developers use.[5]
               </p>
-              <h4>Development Frameworks</h4>
+              <h4>Django vs Flask</h4>
               <p>
                 Here, we are going to compare the two frameworks: Django and Flask. Django’s unique built-in admin package will
                 allow developers to manage data with create, read, update, delete (CRUD) operations.[3] This feature is not
@@ -169,6 +189,7 @@
                 reported to be more responsive than Flask’s community, which means that developers will get support more easily.
                 [3][4]
               </p>
+              <h4>Insights</h4>
               <p>
                 Our team has laid out the more prominent differences in these two frameworks and have decided that Django would be a
                 more suitable choice for us. Apart from the fact that our clients strong encouraged us to use Django as their
